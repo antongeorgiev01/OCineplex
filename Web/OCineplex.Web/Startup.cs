@@ -62,7 +62,7 @@
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
             // Application services
-            services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<IEmailSender>( x => new SendGridEmailSender("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"));
             services.AddTransient<ISettingsService, SettingsService>();
         }
 
@@ -75,7 +75,12 @@
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
                 var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                dbContext.Database.Migrate();
+
+                if (env.IsDevelopment())
+                {
+                    dbContext.Database.Migrate();
+                }
+
                 new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             }
 

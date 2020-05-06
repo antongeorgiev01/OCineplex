@@ -26,6 +26,16 @@
 
         public DbSet<Setting> Settings { get; set; }
 
+        public DbSet<Ticket> Tickets { get; set; }
+
+        public DbSet<Projection> Projections { get; set; }
+
+        public DbSet<Movie> Movies { get; set; }
+
+        public DbSet<Hall> Halls { get; set; }
+
+        public DbSet<Seat> Seats { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

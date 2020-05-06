@@ -4,9 +4,8 @@ namespace OCineplex.Data.Models
     using System;
     using System.Collections.Generic;
 
-    using OCineplex.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+    using OCineplex.Data.Common.Models;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
@@ -16,6 +15,7 @@ namespace OCineplex.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+            this.Tickets = new HashSet<Ticket>();
         }
 
         // Audit info
@@ -27,6 +27,8 @@ namespace OCineplex.Data.Models
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }
+
+        public virtual ICollection<Ticket> Tickets { get; set; }
 
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 
