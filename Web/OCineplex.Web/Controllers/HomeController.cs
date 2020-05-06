@@ -1,16 +1,34 @@
 ﻿namespace OCineplex.Web.Controllers
 {
     using System.Diagnostics;
-
-    using OCineplex.Web.ViewModels;
+    using System.Linq;
 
     using Microsoft.AspNetCore.Mvc;
+    using OCineplex.Data;
+    using OCineplex.Web.ViewModels;
+    using OCineplex.Web.ViewModels.Home;
 
     public class HomeController : BaseController
     {
+        private readonly ApplicationDbContext db;
+
+        public HomeController(ApplicationDbContext db)
+        {
+            this.db = db;
+        }
+
         public IActionResult Index()
         {
-            return this.View();
+            var viewModel = new IndexViewModel();
+            var movies = this.db.Movies.Select(x => new IndexMovieViewModel
+            {
+                Title = x.Title,
+                Director = x.Director,
+                ImageUrl = x.ImageUrl,
+                Name = "GO",
+            }).ToList();
+            viewModel.Movies = movies;
+            return this.View(viewModel);
         }
 
         public IActionResult Privacy()
