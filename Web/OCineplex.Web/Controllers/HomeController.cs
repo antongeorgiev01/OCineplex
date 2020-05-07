@@ -4,29 +4,26 @@
     using System.Linq;
 
     using Microsoft.AspNetCore.Mvc;
-    using OCineplex.Data;
+    using OCineplex.Data.Common.Repositories;
+    using OCineplex.Data.Models;
+    using OCineplex.Services.Data;
+    using OCineplex.Services.Mapping;
     using OCineplex.Web.ViewModels;
     using OCineplex.Web.ViewModels.Home;
 
     public class HomeController : BaseController
     {
-        private readonly ApplicationDbContext db;
+        private readonly IMoviesService moviesService;
 
-        public HomeController(ApplicationDbContext db)
+        public HomeController(IMoviesService moviesService)
         {
-            this.db = db;
+            this.moviesService = moviesService;
         }
 
         public IActionResult Index()
         {
             var viewModel = new IndexViewModel();
-            var movies = this.db.Movies.Select(x => new IndexMovieViewModel
-            {
-                Title = x.Title,
-                Director = x.Director,
-                ImageUrl = x.ImageUrl,
-                Name = "GO",
-            }).ToList();
+            var movies = this.moviesService.GetAll<IndexMovieViewModel>();
             viewModel.Movies = movies;
             return this.View(viewModel);
         }

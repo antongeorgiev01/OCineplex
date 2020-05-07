@@ -1,6 +1,9 @@
 ﻿namespace OCineplex.Web.ViewModels.Home
 {
-    public class IndexMovieViewModel
+    using OCineplex.Data.Models;
+    using OCineplex.Services.Mapping;
+
+    public class IndexMovieViewModel : IMapFrom<Movie>
     {
         public string Title { get; set; }
 
@@ -8,8 +11,6 @@
 
         public string ImageUrl { get; set; }
 
-        public string Name { get; set; }
-
-        public string Url => $"/m/{this.Name.Replace(' ', '-')}";
+        public string Url => $"/m/{this.Title.Replace(' ', '-')}";
     }
 }
