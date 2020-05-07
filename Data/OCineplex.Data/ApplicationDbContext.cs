@@ -33,7 +33,9 @@
 
         public DbSet<Hall> Halls { get; set; }
 
-        public DbSet<Seat> Seats { get; set; }
+        public DbSet<Cinema> Cinemas { get; set; }
+
+        public DbSet<Reservation> Reservations { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

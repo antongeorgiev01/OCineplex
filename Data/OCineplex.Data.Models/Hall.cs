@@ -9,17 +9,18 @@
         public Hall()
         {
             this.Projections = new HashSet<Projection>();
-            this.Seats = new HashSet<Seat>();
         }
 
-        public string Name { get; set; }
+        public int Number { get; set; }
 
-        public bool Is2D { get; set; }
+        public short SeatsPerRow { get; set; }
 
-        public bool Is3D { get; set; }
+        public short Rows { get; set; }
+
+        public int CinemaId { get; set; }
+
+        public virtual Cinema Cinema { get; set; }
 
         public ICollection<Projection> Projections { get; set; }
-
-        public ICollection<Seat> Seats { get; set; }
-    }
+}
 }

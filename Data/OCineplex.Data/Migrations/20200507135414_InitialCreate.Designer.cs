@@ -10,8 +10,8 @@ using OCineplex.Data;
 namespace OCineplex.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200506081024_InitialModelsAdd")]
-    partial class InitialModelsAdd
+    [Migration("20200507135414_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -245,24 +245,21 @@ namespace OCineplex.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("OCineplex.Data.Models.Hall", b =>
+            modelBuilder.Entity("OCineplex.Data.Models.Cinema", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
-
-                    b.Property<bool>("Is2D")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Is3D")
-                        .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -274,6 +271,46 @@ namespace OCineplex.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Cinemas");
+                });
+
+            modelBuilder.Entity("OCineplex.Data.Models.Hall", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CinemaId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
+
+                    b.Property<short>("Rows")
+                        .HasColumnType("smallint");
+
+                    b.Property<short>("SeatsPerRow")
+                        .HasColumnType("smallint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CinemaId");
 
                     b.HasIndex("IsDeleted");
 
@@ -292,6 +329,9 @@ namespace OCineplex.Data.Migrations
 
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Director")
                         .HasColumnType("nvarchar(max)");
@@ -317,6 +357,9 @@ namespace OCineplex.Data.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TrailerUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
@@ -331,10 +374,10 @@ namespace OCineplex.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("AvailableSeatsCount")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("DateTime")
+                    b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DeletedOn")
@@ -352,6 +395,9 @@ namespace OCineplex.Data.Migrations
                     b.Property<int>("MovieId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.HasIndex("HallId");
@@ -363,12 +409,18 @@ namespace OCineplex.Data.Migrations
                     b.ToTable("Projections");
                 });
 
-            modelBuilder.Entity("OCineplex.Data.Models.Seat", b =>
+            modelBuilder.Entity("OCineplex.Data.Models.Reservation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CinemaName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Column")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -376,7 +428,7 @@ namespace OCineplex.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("HallId")
+                    b.Property<int>("HallNumber")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
@@ -385,13 +437,25 @@ namespace OCineplex.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.Property<string>("MovieName")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("HallId");
+                    b.Property<int>("ProjectionId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ProjectionStartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Row")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("Seats");
+                    b.HasIndex("ProjectionId");
+
+                    b.ToTable("Reservations");
                 });
 
             modelBuilder.Entity("OCineplex.Data.Models.Setting", b =>
@@ -433,6 +497,12 @@ namespace OCineplex.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("CinemaName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Column")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -445,10 +515,22 @@ namespace OCineplex.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("MovieName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("ProjectionId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ProjectionStartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RoomNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Row")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
@@ -519,6 +601,15 @@ namespace OCineplex.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("OCineplex.Data.Models.Hall", b =>
+                {
+                    b.HasOne("OCineplex.Data.Models.Cinema", "Cinema")
+                        .WithMany("Halls")
+                        .HasForeignKey("CinemaId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("OCineplex.Data.Models.Projection", b =>
                 {
                     b.HasOne("OCineplex.Data.Models.Hall", "Hall")
@@ -534,11 +625,11 @@ namespace OCineplex.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("OCineplex.Data.Models.Seat", b =>
+            modelBuilder.Entity("OCineplex.Data.Models.Reservation", b =>
                 {
-                    b.HasOne("OCineplex.Data.Models.Hall", "Hall")
-                        .WithMany("Seats")
-                        .HasForeignKey("HallId")
+                    b.HasOne("OCineplex.Data.Models.Projection", "Projection")
+                        .WithMany("Reservations")
+                        .HasForeignKey("ProjectionId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

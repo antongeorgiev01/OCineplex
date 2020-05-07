@@ -44,4 +44,8 @@
     <ProjectReference Include="..\OCineplex.Data.Models\OCineplex.Data.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

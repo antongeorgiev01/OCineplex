@@ -4,21 +4,15 @@
 
     using OCineplex.Data.Common.Models;
 
-    public class Ticket : BaseDeletableModel<int>
+    public class Reservation : BaseDeletableModel<int>
     {
-        public decimal Price { get; set; }
-
-        public int UserId { get; set; }
-
-        public virtual ApplicationUser User { get; set; }
-
         public DateTime ProjectionStartDate { get; set; }
 
         public string MovieName { get; set; }
 
         public string CinemaName { get; set; }
 
-        public int RoomNumber { get; set; }
+        public int HallNumber { get; set; }
 
         public int Row { get; set; }
 
