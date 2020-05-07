@@ -3,12 +3,11 @@
     using System;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Mvc;
     using OCineplex.Data.Common.Repositories;
     using OCineplex.Data.Models;
     using OCineplex.Services.Data;
     using OCineplex.Web.ViewModels.Settings;
-
-    using Microsoft.AspNetCore.Mvc;
 
     public class SettingsController : BaseController
     {

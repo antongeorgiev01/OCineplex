@@ -20,9 +20,14 @@
         {
             IQueryable<Movie> query =
             this.moviesRepository.All().OrderBy(x => x.Title);
-
-
             return query.To<T>().ToList();
+        }
+
+        public T GetByTitle<T>(string title)
+        {
+            var movie = this.moviesRepository.All().Where(x => x.Title == title).To<T>().FirstOrDefault();
+
+            return movie;
         }
     }
 }

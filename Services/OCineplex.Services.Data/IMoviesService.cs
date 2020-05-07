@@ -5,5 +5,7 @@
     public interface IMoviesService
     {
         IEnumerable<T> GetAll<T>();
+
+        T GetByTitle<T>(string title);
     }
 }

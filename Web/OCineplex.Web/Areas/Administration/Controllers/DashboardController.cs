@@ -1,9 +1,8 @@
 ﻿namespace OCineplex.Web.Areas.Administration.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
     using OCineplex.Services.Data;
     using OCineplex.Web.ViewModels.Administration.Dashboard;
-
-    using Microsoft.AspNetCore.Mvc;
 
     public class DashboardController : AdministrationController
     {
