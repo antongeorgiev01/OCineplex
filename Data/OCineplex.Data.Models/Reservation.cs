@@ -1,4 +1,4 @@
-﻿namespace OCineplex.Data.Models
+﻿ namespace OCineplex.Data.Models
 {
     using System;
 

@@ -1,0 +1,24 @@
+﻿@model OCineplex.Web.ViewModels.Movies.MovieViewModel
+@{
+    this.ViewData["Title"] = $"{Model.Title}";
+}
+
+
+
+        <div class="media">
+            <img src="@Model.ImageUrl" class="align-self-start mr-3" alt="...">
+            <div class="media-body">
+                <h5 class="mt-0">@Model.Title</h5>
+                <p>@Model.Director</p>
+                <p>@Model.Duration</p>
+                <p>@Model.Rating / 10</p>
+                <p>@Model.Genre</p>
+                <p>@Model.Description</p>
+
+            </div>
+
+        </div>
+        <div class="embed-responsive embed-responsive-4by3">
+            <iframe class="embed-responsive-item" src=@Model.TrailerUrl></iframe>
+        </div>
+    

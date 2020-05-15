@@ -4,23 +4,33 @@
     this.ViewData["Title"] = $"Welcome to {GlobalConstants.SystemName}!";
 }
 
-        <div class="text-center">
-            <h1 class="display-4">@this.ViewData["Title"]</h1>           
-        </div>
-        <div class="container">
-            <div class="row">
-                @foreach (var movie in Model.Movies)
-                {                  
-                        <div class="col-md-4 card m-md-4" style="width: 18rem;">
-                            <img src="@movie.ImageUrl" class="card-img-top" alt="@movie.ImageUrl">
+
+    <div class="text-center">
+        <h1 class="display-4 text-warning">@this.ViewData["Title"]</h1>
+
+
+        <div class="card-group">
+
+            @foreach (var movie in Model.Movies)
+            {
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="@movie.ImageUrl" class="card-img" alt="@movie.ImageUrl">
+                        </div>
+                        <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">@movie.Title</h5>
-                                <p class="card-text">@movie.Description</p>
-                                <a href="@movie.Url" class="btn btn-primary">See movie</a>
+                                <h5 class="card-title text-warning">@movie.Title</h5>
+                                <p class="card-text ">@movie.Description</p>
+                                <a href="@movie.Url" class="btn btn-warning">See movie</a>
                             </div>
                         </div>
-                   
-                }
-            </div>
+                    </div>
+                </div>
+
+            }
         </div>
+    </div>
+
 

@@ -1,9 +1,8 @@
 ﻿namespace OCineplex.Web.ViewModels.Settings
 {
+    using AutoMapper;
     using OCineplex.Data.Models;
     using OCineplex.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {

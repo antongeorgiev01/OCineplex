@@ -15,6 +15,8 @@
 
         public string Address { get; set; }
 
+        public string ImageUrl { get; set; }
+
         public virtual ICollection<Hall> Halls { get; set; }
     }
 }

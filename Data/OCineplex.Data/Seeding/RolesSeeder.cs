@@ -4,11 +4,10 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using OCineplex.Common;
-    using OCineplex.Data.Models;
-
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
+    using OCineplex.Common;
+    using OCineplex.Data.Models;
 
     internal class RolesSeeder : ISeeder
     {

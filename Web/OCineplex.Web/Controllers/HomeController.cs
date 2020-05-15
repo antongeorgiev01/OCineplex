@@ -2,7 +2,11 @@
 {
     using System.Diagnostics;
     using System.Linq;
+    using System.Threading.Tasks;
 
+    using CloudinaryDotNet;
+    using CloudinaryDotNet.Actions;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using OCineplex.Data.Common.Repositories;
     using OCineplex.Data.Models;

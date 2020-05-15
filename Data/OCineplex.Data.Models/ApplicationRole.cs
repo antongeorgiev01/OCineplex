@@ -3,9 +3,8 @@ namespace OCineplex.Data.Models
 {
     using System;
 
-    using OCineplex.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+    using OCineplex.Data.Common.Models;
 
     public class ApplicationRole : IdentityRole, IAuditInfo, IDeletableEntity
     {

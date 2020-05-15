@@ -2,6 +2,7 @@
 {
     using System.Reflection;
 
+    using CloudinaryDotNet;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -10,12 +11,14 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using MMDB.Services;
     using OCineplex.Data;
     using OCineplex.Data.Common;
     using OCineplex.Data.Common.Repositories;
     using OCineplex.Data.Models;
     using OCineplex.Data.Repositories;
     using OCineplex.Data.Seeding;
+    using OCineplex.Services;
     using OCineplex.Services.Data;
     using OCineplex.Services.Mapping;
     using OCineplex.Services.Messaging;
@@ -53,6 +56,15 @@
                     });
             services.AddRazorPages();
 
+            Account account = new Account(
+                     this.configuration["Cloudinary:AppName"],
+                     this.configuration["Cloudinary:AppKey"],
+                     this.configuration["Cloudinary:AppSecret"]);
+
+            Cloudinary cloudinary = new Cloudinary(account);
+
+            services.AddSingleton(cloudinary);
+
             services.AddSingleton(this.configuration);
 
             // Data repositories
@@ -64,6 +76,8 @@
             services.AddTransient<IEmailSender>(x => new SendGridEmailSender("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"));
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IMoviesService, MoviesService>();
+            services.AddTransient<ICinemasService, CinemasService>();
+            services.AddTransient<ICloudinaryService, CloudinaryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
