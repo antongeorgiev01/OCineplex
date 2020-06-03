@@ -56,7 +56,7 @@
 
             var cinemaId = await this.cinemasService.CreateAsync(input.Name, input.Address, pictureUrl);
 
-            return this.Redirect("/");
+            return this.RedirectToAction("ById", new { id = cinemaId });
         }
     }
 }

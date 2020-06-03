@@ -1,12 +1,12 @@
 ﻿namespace OCineplex.Services.Data
 {
-    using System;
     using System.Collections.Generic;
-    using System.Text;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using OCineplex.Data.Common.Repositories;
     using OCineplex.Data.Models;
+    using OCineplex.Services.Mapping;
 
     public class CinemasService : ICinemasService
     {
@@ -30,6 +30,19 @@
             await this.cinemasRepository.SaveChangesAsync();
 
             return cinema.Id;
+        }
+
+        public IEnumerable<T> GetAll<T>(int? count = null)
+        {
+            IQueryable<Cinema> query =
+                this.cinemasRepository.All().OrderBy(x => x.Name);
+
+            if (count.HasValue)
+            {
+                query = query.Take(count.Value);
+            }
+
+            return query.To<T>().ToList();
         }
     }
 }
